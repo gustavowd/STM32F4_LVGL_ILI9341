@@ -521,8 +521,9 @@ void StartDefaultTask(void const * argument)
 	lvgl_init();
 	lvgl_xpt2046_touch_init();
 
-	dma_demo();
-	vTaskDelay(5000);
+	//dma_demo();
+	//vTaskDelay(5000);
+	/*
 	lv_obj_clean(lv_scr_act());
 	test_with_dma=1;
 	for (int i=0; i < 2; i++) {
@@ -530,6 +531,7 @@ void StartDefaultTask(void const * argument)
 	  sd_img_dma_demo();
 	  lv_obj_clean(lv_scr_act());
 	}
+	*/
 
 	lv_demo_widgets();
 

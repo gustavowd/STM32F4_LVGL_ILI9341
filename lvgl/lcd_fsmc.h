@@ -8,8 +8,8 @@
 #define LCD_WIDTH		240
 #define LCD_HEIGHT 		320
 
-#define LCD_BL_ON() HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_RESET)
-#define LCD_BL_OFF() HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_SET)
+#define LCD_BL_ON() HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_SET)
+#define LCD_BL_OFF() HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_RESET)
 
 #define LCD_CMD_BASE        		((uint32_t)0x60000000)
 #define LCD_DATA_BASE        		((uint32_t)0x60080000)

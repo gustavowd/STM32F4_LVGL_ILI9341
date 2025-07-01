@@ -13,8 +13,8 @@
 #include "task.h"
 
 
-#define READ_X 0xD0
-#define READ_Y 0x90
+#define READ_X 0x90
+#define READ_Y 0xD0
 
 
 uint16_t cRawX_min = XPT2046_MIN_RAW_X;
@@ -55,6 +55,7 @@ bool XPT2046_TouchGetCoordinates(uint16_t* x, uint16_t* y)
 		tx = (raw_x - cRawX_min) * XPT2046_SCALE_X / (cRawX_max - cRawX_min);
 		ty = (raw_y - cRawY_min) * XPT2046_SCALE_Y / (cRawY_max - cRawY_min);
 
+		/*
 		uint8_t lot = lcd_get_orientation();
 		switch (lot)
 		{
@@ -75,6 +76,9 @@ bool XPT2046_TouchGetCoordinates(uint16_t* x, uint16_t* y)
 			*y=tx;
 			break;
 		}
+		*/
+		*x=tx;
+		*y=ty;
 		ret_value =true;
     }
 	return ret_value;
@@ -133,7 +137,7 @@ bool XPT2046_TouchCalibration()
 	bool correct=true;
 	uint32_t width, height;
 	uint8_t lot = lcd_get_orientation();
-	lcd_set_orientation(LCD_ORIENTATION_PORTRAIT);
+	lcd_set_orientation(LCD_ORIENTATION_LANDSCAPE);
 	width = lcd_get_width();
 	height = lcd_get_height();
 	lcd_fill_RGB(0x0000, 0, 0, width-1, height-1);
@@ -148,11 +152,12 @@ bool XPT2046_TouchCalibration()
 		lcd_set_orientation(lot);
 		return false;
 	}
+
 	lcd_fill_RGB(0x0000, 0, 0, width-1, height-1);
 	lcd_fill_RGB(0xffff, 0, height-7, 6, 6);
 
 	while(XPT2046_TouchPressed());
-	vTaskDelay(2);
+	vTaskDelay(500);
 
 	lcd_set_window(20, 100, 20, 100);
 	while(!XPT2046_TouchPressed());
@@ -164,7 +169,7 @@ bool XPT2046_TouchCalibration()
 	lcd_fill_RGB(0x0000, 0, 0, width-1, height-1);
 	lcd_fill_RGB(0xffff,width-7, height-7, 6, 6);
 	while(XPT2046_TouchPressed());
-	vTaskDelay(2);
+	vTaskDelay(500);
 
 
 	lcd_set_window(20, 100, 20, 100);
@@ -177,7 +182,7 @@ bool XPT2046_TouchCalibration()
 	lcd_fill_RGB(0x0000, 0, 0, width-1, height-1);
 	lcd_fill_RGB(0xffff, width-7, 0, 6, 6);
 	while(XPT2046_TouchPressed());
-	vTaskDelay(2);
+	vTaskDelay(500);
 
 	lcd_set_window(20, 100, 20, 100);
 	while(!XPT2046_TouchPressed());

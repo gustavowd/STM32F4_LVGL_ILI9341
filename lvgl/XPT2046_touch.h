@@ -23,8 +23,8 @@ extern SPI_HandleTypeDef XPT2046_SPI_PORT;
 #define XPT2046_CS_GPIO_Port  T_CS_GPIO_Port
 
 // change depending on screen orientation
-#define XPT2046_SCALE_X 240
-#define XPT2046_SCALE_Y 320
+#define XPT2046_SCALE_X 320
+#define XPT2046_SCALE_Y 240
 
 #define XPT2046_MIN_RAW_X 1860
 #define XPT2046_MAX_RAW_X 29650
